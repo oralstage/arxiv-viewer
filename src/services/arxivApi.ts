@@ -69,11 +69,12 @@ function parseArxivXml(xmlString: string): ArxivPaper[] {
 export async function fetchArxivPapers(
   categories: string[],
   maxResults: number = 50,
+  start: number = 0,
 ): Promise<ArxivPaper[]> {
   if (categories.length === 0) return [];
 
   const searchQuery = categories.map((c) => `cat:${c}`).join('+OR+');
-  const url = `${ARXIV_ENDPOINT}?search_query=${searchQuery}&sortBy=submittedDate&sortOrder=descending&max_results=${maxResults}`;
+  const url = `${ARXIV_ENDPOINT}?search_query=${searchQuery}&sortBy=submittedDate&sortOrder=descending&max_results=${maxResults}&start=${start}`;
 
   const response = await fetch(url);
   if (!response.ok) {

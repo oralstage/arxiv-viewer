@@ -15,7 +15,7 @@ function App() {
     ['cond-mat.mes-hall'],
   );
 
-  const { papers, isLoading: arxivLoading, error, refetch } = useArxivPapers(selectedCategories);
+  const { papers, isLoading: arxivLoading, isLoadingMore, error, hasMore, refetch, loadMore } = useArxivPapers(selectedCategories);
   const { paperIdMap, isLoading: s2Loading } = useSemanticScholar(papers);
   const { inputValue, setInputValue, mode, setMode, filterPapers, hasKeywords } = useKeywordFilter();
 
@@ -80,6 +80,24 @@ function App() {
               </p>
             )}
             <PaperList papers={displayPapers} s2Loading={s2Loading} />
+
+            {hasMore && !isLoadingMore && (
+              <div className="flex justify-center mt-6 mb-4">
+                <button
+                  onClick={loadMore}
+                  className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors text-sm font-medium shadow-sm"
+                >
+                  Load more papers
+                </button>
+              </div>
+            )}
+
+            {isLoadingMore && (
+              <div className="flex items-center justify-center py-6">
+                <div className="w-6 h-6 border-3 border-arxiv-red border-t-transparent rounded-full animate-spin" />
+                <span className="text-gray-500 text-sm ml-3">Loading more papers...</span>
+              </div>
+            )}
           </>
         )}
       </main>
