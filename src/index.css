@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-arxiv-red: #b31b1b;
+  --color-arxiv-dark: #1a1a2e;
+}
