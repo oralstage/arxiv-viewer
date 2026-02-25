@@ -15,6 +15,7 @@ export function PaperCard({ paper, s2Loading }: Props) {
       }`}
     >
       <S2FigureThumbnail
+        arxivId={paper.id}
         s2PaperId={paper.s2PaperId}
         primaryCategory={paper.primaryCategory}
         s2Loading={s2Loading}
